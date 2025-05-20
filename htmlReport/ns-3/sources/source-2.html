@@ -45,26 +45,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">BMIController</td>
 <td class="coverageStat">
   <span class="percent">
-    16.7%
+    100%
   </span>
   <span class="absValue">
-    (1/6)
+    (6/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    75%
   </span>
   <span class="absValue">
-    (0/12)
+    (9/12)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    6.7%
+    86.7%
   </span>
   <span class="absValue">
-    (2/30)
+    (26/30)
   </span>
 </td>
 </tr>
@@ -72,18 +72,18 @@ Current scope:     <a href="../../index.html">all classes</a>
     <td class="name">BMIController$calculateBmi$$inlined$jsonToObject$1</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
   </tr>
@@ -91,26 +91,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    14.3%
+    100%
   </span>
   <span class="absValue">
-    (1/7)
+    (7/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    75%
   </span>
   <span class="absValue">
-    (0/12)
+    (9/12)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    6.5%
+    87.1%
   </span>
   <span class="absValue">
-    (2/31)
+    (27/31)
   </span>
 </td>
 </tr>
@@ -135,58 +135,58 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;    private var bmiDAO = BmiDAO()</b>
 &nbsp;
 &nbsp;    fun getAllBmi(ctx: Context) {
-<b class="nc">&nbsp;        val bimes = bmiDAO.getAll()</b>
-<b class="nc">&nbsp;        if (bimes.size != 0) {</b>
-<b class="nc">&nbsp;            ctx.status(200)</b>
+<b class="fc">&nbsp;        val bimes = bmiDAO.getAll()</b>
+<b class="pc">&nbsp;        if (bimes.size != 0) {</b>
+<b class="fc">&nbsp;            ctx.status(200)</b>
 &nbsp;        } else {
 <b class="nc">&nbsp;            ctx.status(404)</b>
 &nbsp;        }
-<b class="nc">&nbsp;        ctx.json(bimes)</b>
+<b class="fc">&nbsp;        ctx.json(bimes)</b>
 &nbsp;    }
 &nbsp;
 &nbsp;
 &nbsp;    fun getByBmiId(ctx: Context) {
-<b class="nc">&nbsp;        val bimes = bmiDAO.findByBmiId((ctx.pathParam(&quot;bmi-id&quot;).toInt()))</b>
-<b class="nc">&nbsp;        if (bimes != null) {</b>
+<b class="fc">&nbsp;        val bimes = bmiDAO.findByBmiId((ctx.pathParam(&quot;bmi-id&quot;).toInt()))</b>
+<b class="pc">&nbsp;        if (bimes != null) {</b>
 <b class="nc">&nbsp;            ctx.json(bimes)</b>
 <b class="nc">&nbsp;            ctx.status(200)</b>
 &nbsp;        } else {
-<b class="nc">&nbsp;            ctx.status(404)</b>
+<b class="fc">&nbsp;            ctx.status(404)</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
 &nbsp;    fun getBmiByUserId(ctx: Context) {
-<b class="nc">&nbsp;        if (userDao.findById(ctx.pathParam(&quot;user-id&quot;).toInt()) != null) {</b>
-<b class="nc">&nbsp;            val bmies = bmiDAO.findByUserId(ctx.pathParam(&quot;user-id&quot;).toInt())</b>
-<b class="nc">&nbsp;            if (bmies.isNotEmpty()) {</b>
-<b class="nc">&nbsp;                ctx.json(bmies)</b>
-<b class="nc">&nbsp;                ctx.status(200)</b>
+<b class="fc">&nbsp;        if (userDao.findById(ctx.pathParam(&quot;user-id&quot;).toInt()) != null) {</b>
+<b class="fc">&nbsp;            val bmies = bmiDAO.findByUserId(ctx.pathParam(&quot;user-id&quot;).toInt())</b>
+<b class="pc">&nbsp;            if (bmies.isNotEmpty()) {</b>
+<b class="fc">&nbsp;                ctx.json(bmies)</b>
+<b class="fc">&nbsp;                ctx.status(200)</b>
 &nbsp;            } else {
 <b class="nc">&nbsp;                ctx.status(404)</b>
 &nbsp;            }
 &nbsp;        } else {
-<b class="nc">&nbsp;            ctx.status(404)</b>
+<b class="fc">&nbsp;            ctx.status(404)</b>
 &nbsp;        }
 &nbsp;
 &nbsp;    }
 &nbsp;
 &nbsp;    fun deleteBmiId(ctx: Context) {
-<b class="nc">&nbsp;        if (bmiDAO.deleteByBmiId(ctx.pathParam(&quot;bmi-id&quot;).toInt()) != 0)</b>
-<b class="nc">&nbsp;            ctx.status(204)</b>
+<b class="fc">&nbsp;        if (bmiDAO.deleteByBmiId(ctx.pathParam(&quot;bmi-id&quot;).toInt()) != 0)</b>
+<b class="fc">&nbsp;            ctx.status(204)</b>
 &nbsp;        else
-<b class="nc">&nbsp;            ctx.status(404)</b>
+<b class="fc">&nbsp;            ctx.status(404)</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    fun calculateBmi(ctx: Context) {
-<b class="nc">&nbsp;        val bmi: Bmi = jsonToObject(ctx.body())</b>
-<b class="nc">&nbsp;        val userId = userDao.findById(bmi.userId)</b>
-<b class="nc">&nbsp;        if (userId != null) {</b>
-<b class="nc">&nbsp;            val bmiId = bmiDAO.save(bmi)</b>
-<b class="nc">&nbsp;            bmi.id = bmiId</b>
-<b class="nc">&nbsp;            ctx.json(bmi)</b>
-<b class="nc">&nbsp;            ctx.status(201)</b>
+<b class="fc">&nbsp;        val bmi: Bmi = jsonToObject(ctx.body())</b>
+<b class="fc">&nbsp;        val userId = userDao.findById(bmi.userId)</b>
+<b class="fc">&nbsp;        if (userId != null) {</b>
+<b class="fc">&nbsp;            val bmiId = bmiDAO.save(bmi)</b>
+<b class="fc">&nbsp;            bmi.id = bmiId</b>
+<b class="fc">&nbsp;            ctx.json(bmi)</b>
+<b class="fc">&nbsp;            ctx.status(201)</b>
 &nbsp;        } else {
-<b class="nc">&nbsp;            ctx.status(404)</b>
+<b class="fc">&nbsp;            ctx.status(404)</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
@@ -214,7 +214,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-12-29 00:16</div>
+    <div style="float:right;">generated on 2025-05-20 10:21</div>
 </div>
 </body>
 </html>

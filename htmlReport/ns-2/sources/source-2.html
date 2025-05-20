@@ -72,37 +72,18 @@ Current scope:     <a href="../../index.html">all classes</a>
     <td class="name">JavalinConfig$app$2$1</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-  </tr>
-  <tr>
-    <td class="name">JavalinConfig$startJavalinService$app$2$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
   </tr>
@@ -110,10 +91,10 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    62.5%
+    85.7%
   </span>
   <span class="absValue">
-    (5/8)
+    (6/7)
   </span>
 </td>
 <td class="coverageStat">
@@ -126,10 +107,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    92.4%
+    95.4%
   </span>
   <span class="absValue">
-    (61/66)
+    (62/65)
   </span>
 </td>
 </tr>
@@ -162,14 +143,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        it.staticFiles.enableWebjars()</b>
 <b class="fc">&nbsp;        it.vue.vueInstanceNameInJs = &quot;app&quot; // only required for Vue 3, is defined in layout.html</b>
 <b class="fc">&nbsp;    }.apply {</b>
-<b class="pc">&nbsp;        exception(Exception::class.java) { e, _ -&gt; e.printStackTrace() }</b>
+<b class="fc">&nbsp;        exception(Exception::class.java) { e, _ -&gt; e.printStackTrace() }</b>
 <b class="fc">&nbsp;        error(404) { ctx -&gt; ctx.json(&quot;404 : Not Found&quot;) }</b>
 <b class="fc">&nbsp;    }</b>
 &nbsp;
 &nbsp;    fun startJavalinService(): Javalin {
 <b class="fc">&nbsp;        app.start(getRemoteAssignedPort())</b>
 <b class="fc">&nbsp;        registerRoutes(app)</b>
-<b class="pc">&nbsp;        return app</b>
+<b class="fc">&nbsp;        return app</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    fun getJavalinService(): Javalin {
@@ -186,7 +167,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;            Integer.parseInt(remotePort)</b>
 &nbsp;        } else {
 <b class="fc">&nbsp;            println(&quot;WARN: PORT environment variable not found. Using default port 7001.&quot;)</b>
-<b class="fc">&nbsp;            7001</b>
+<b class="fc">&nbsp;            8001</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
@@ -290,7 +271,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-12-29 00:16</div>
+    <div style="float:right;">generated on 2025-05-20 10:21</div>
 </div>
 </body>
 </html>

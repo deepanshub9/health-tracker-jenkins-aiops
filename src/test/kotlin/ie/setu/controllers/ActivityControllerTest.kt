@@ -9,15 +9,12 @@ import kong.unirest.core.HttpResponse
 import kong.unirest.core.JsonNode
 import kong.unirest.core.Unirest
 import org.joda.time.DateTime
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-
 class ActivityControllerTest {
 
     private val db = DbConfig().getDbConnection()
@@ -30,114 +27,122 @@ class ActivityControllerTest {
         fun `get all activities from the database returns 200 or 404 response`() {
             val response = Unirest.get(origin + "/api/activities/").asString()
             if (response.status == 200) {
-                val retrievedactivities: ArrayList<Activity> = jsonToObject(response.body.toString())
-                assertNotEquals(0, retrievedactivities.size)
-            }
-            else {
+                val retrievedActivities: ArrayList<Activity> = jsonToObject(response.body.toString())
+                assertNotEquals(0, retrievedActivities.size)
+            } else {
                 assertEquals(404, response.status)
             }
         }
+
         @Test
-        fun `get activities by id when user does not exist returns 404 response`() {
-
-            //Arrange - test data for user id
+        fun `get activity by id when activity does not exist returns 400 response`() {
             val id = -1
-
-            // Act - attempt to retrieve the non-existent user from the database
-            val retrieveResponse = Unirest.get(origin + "/api/activities/${id}").asString()
-
-            // Assert -  verify return code
+            val retrieveResponse = Unirest.get(origin + "/api/activities/$id").asString()
             assertEquals(400, retrieveResponse.status)
         }
     }
+
     @Nested
-    inner class CreateActivities{
+    inner class CreateActivities {
         @Test
-        fun `add a activity with correct details returns a 201 response`(){
-            //Arrange - add the user
-            val addResponse = addUser(users[0].name,"testr296@gmail.com")
-            val useradd = addResponse.body.toString()
-            val addedUser : User = jsonToObject(addResponse.body.toString())
-            val addActivityResponse = addActivity(activities[0].description,activities[0].duration,activities[0].calories,activities[0].started,addedUser.id
+        fun `add an activity with correct details returns a 201 response`() {
+            val addUserResponse = addUser(users[0].name, "test_create_activity@gmail.com")
+            val addedUser: User = jsonToObject(addUserResponse.body.toString())
+            val addActivityResponse = addActivity(
+                activities[0].description,
+                activities[0].duration,
+                activities[0].calories,
+                activities[0].started,
+                addedUser.id
             )
             assertEquals(201, addActivityResponse.status)
             deleteUser(addedUser.id)
         }
     }
+
     @Nested
-    inner class UpdateActivity{
+    inner class UpdateActivity {
         @Test
-        fun `updating a activity when it exists, returns a 200 response`(){
-            val addResponse = addUser(users[0].name,"testj894@gmail.com")
-            val useradd = addResponse.body.toString()
-            val addedUser : User = jsonToObject(addResponse.body.toString())
-            val addActivityResponse = addActivity(activities[0].description,activities[0].duration,activities[0].calories,activities[0].started,addedUser.id
+        fun `updating an activity when it exists returns a 200 response`() {
+            val addUserResponse = addUser(users[0].name, "test_update_activity@gmail.com")
+            val addedUser: User = jsonToObject(addUserResponse.body.toString())
+            val addActivityResponse = addActivity(
+                activities[0].description,
+                activities[0].duration,
+                activities[0].calories,
+                activities[0].started,
+                addedUser.id
             )
-            assertEquals(201, addActivityResponse.status)
-            val addedActivity:Activity = jsonToObject(addActivityResponse.body.toString())
+            val addedActivity: Activity = jsonToObject(addActivityResponse.body.toString())
             val activityId = addedActivity.id
-            val updatedActivityResponse = updateActivity(activityId, "dancing", 60.0, activities[0].calories,activities[0].started,addedUser.id)
+            val updatedActivityResponse = updateActivity(
+                activityId, "dancing", 60.0, activities[0].calories, activities[0].started, addedUser.id
+            )
             assertEquals(200, updatedActivityResponse.status)
             val retrievedActivityResponse = retrieveActivityById(activityId)
-            val updatedActivity:Activity = jsonToObject(retrievedActivityResponse.body.toString())
+            val updatedActivity: Activity = jsonToObject(retrievedActivityResponse.body.toString())
             assertEquals("dancing", updatedActivity.description)
             assertEquals(60.0, updatedActivity.duration)
+            deleteUser(addedUser.id)
         }
-        @Test
-        fun `updating a activity when it doesn't exist, returns a 404 response`() {
 
-            //Act & Assert - attempt to update the email and name of user that doesn't exist
-            assertEquals(404, updateActivity(-1, activities[0].description,activities[0].duration,activities[0].calories,activities[0].started,-1).status)
+        @Test
+        fun `updating an activity when it doesn't exist returns a 404 response`() {
+            assertEquals(
+                404,
+                updateActivity(-1, activities[0].description, activities[0].duration, activities[0].calories, activities[0].started, -1).status
+            )
         }
     }
+
     @Nested
-    inner class DeleteActivities{
+    inner class DeleteActivities {
         @Test
-        fun `deleting a activity when it doesn't exist, returns a 404 response`() {
-            //Act & Assert - attempt to delete a user that doesn't exist
+        fun `deleting an activity when it doesn't exist returns a 404 response`() {
             assertEquals(404, deleteActivity(-1).status)
         }
+
         @Test
-        fun `deleting a activity when it exists, returns a 204 response`(){
-            val addResponse = addUser(users[0].name,"testi210@gmail.com")
-            val useradd = addResponse.body.toString()
-            val addedUser : User = jsonToObject(addResponse.body.toString())
-            val addActivityResponse = addActivity(activities[0].description,activities[0].duration,activities[0].calories,activities[0].started,addedUser.id
+        fun `deleting an activity when it exists returns a 204 response`() {
+            val addUserResponse = addUser(users[0].name, "test_delete_activity@gmail.com")
+            val addedUser: User = jsonToObject(addUserResponse.body.toString())
+            val addActivityResponse = addActivity(
+                activities[0].description,
+                activities[0].duration,
+                activities[0].calories,
+                activities[0].started,
+                addedUser.id
             )
-            val addedActivity:Activity = jsonToObject(addActivityResponse.body.toString())
+            val addedActivity: Activity = jsonToObject(addActivityResponse.body.toString())
             val activityId = addedActivity.id
             assertEquals(204, deleteActivity(activityId).status)
+            deleteUser(addedUser.id)
         }
     }
 
-
-
-
-    //helper function to add a test user to the database
-    private fun addUser (name: String, email: String): HttpResponse<JsonNode> {
+    // Helper functions
+    private fun addUser(name: String, email: String): HttpResponse<JsonNode> {
         return Unirest.post(origin + "/api/users")
             .body("{\"name\":\"$name\", \"email\":\"$email\"}")
             .asJson()
     }
+
+    private fun deleteUser(id: Int): HttpResponse<String> {
+        return Unirest.delete(origin + "/api/users/$id").asString()
+    }
+
     private fun addActivity(
-                             description: String,
-                             duration: Double,
-                             calories: Int,
-                             started: DateTime,
-                             userId: Int
+        description: String,
+        duration: Double,
+        calories: Int,
+        started: DateTime,
+        userId: Int
     ): HttpResponse<JsonNode> {
         return Unirest.post(origin + "/api/activities")
             .body("{\"description\":\"$description\", \"duration\":\"$duration\", \"calories\":\"$calories\", \"started\":\"$started\", \"userId\":\"$userId\" }")
             .asJson()
     }
-    private fun retrieveActivityById(id: Int) : HttpResponse<JsonNode> {
-        return Unirest.get(origin+"/api/activities/$id").asJson()
-    }
 
-    //helper function to delete a test user from the database
-    private fun deleteUser (id: Int): HttpResponse<String> {
-        return Unirest.delete(origin + "/api/users/$id").asString()
-    }
     private fun updateActivity(
         id: Int,
         description: String,
@@ -150,73 +155,12 @@ class ActivityControllerTest {
             .body("{\"description\":\"$description\", \"duration\":\"$duration\", \"calories\":\"$calories\", \"started\":\"$started\", \"userId\":\"$userId\" }")
             .asJson()
     }
-    //helper function to delete a test user from the database
-    private fun deleteActivity (id: Int): HttpResponse<String> {
-        return Unirest.delete(origin + "/api/activities/$id").asString()
+
+    private fun retrieveActivityById(id: Int): HttpResponse<JsonNode> {
+        return Unirest.get(origin + "/api/activities/$id").asJson()
     }
 
-
-
+    private fun deleteActivity(id: Int): HttpResponse<String> {
+        return Unirest.delete(origin + "/api/activities/$id").asString()
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

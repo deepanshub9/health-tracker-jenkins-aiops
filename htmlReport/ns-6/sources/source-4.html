@@ -52,18 +52,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    73.3%
+    100%
   </span>
   <span class="absValue">
-    (11/15)
+    (15/15)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    72%
+    96%
   </span>
   <span class="absValue">
-    (18/25)
+    (24/25)
   </span>
 </td>
 </tr>
@@ -93,19 +93,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;class SleepDAO {</b>
 &nbsp;
 &nbsp;    fun getAllsleepUser(): ArrayList&lt;Sleep&gt; {
-<b class="nc">&nbsp;        val sleepList: ArrayList&lt;Sleep&gt; = arrayListOf()</b>
-<b class="nc">&nbsp;        transaction {</b>
+<b class="fc">&nbsp;        val sleepList: ArrayList&lt;Sleep&gt; = arrayListOf()</b>
+<b class="fc">&nbsp;        transaction {</b>
 &nbsp;
-<b class="nc">&nbsp;            SleepDb.selectAll().map {</b>
+<b class="fc">&nbsp;            SleepDb.selectAll().map {</b>
 <b class="nc">&nbsp;                sleepList.add(mapToSleep(it))</b>
 &nbsp;            }
 &nbsp;        }
-<b class="nc">&nbsp;        return sleepList</b>
+<b class="fc">&nbsp;        return sleepList</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    fun getSleepbyId(id: Int): Sleep? {
-<b class="nc">&nbsp;        return transaction {</b>
-<b class="nc">&nbsp;            SleepDb.selectAll().where { SleepDb.id eq id }.map { mapToSleep(it) }.firstOrNull()</b>
+<b class="fc">&nbsp;        return transaction {</b>
+<b class="fc">&nbsp;            SleepDb.selectAll().where { SleepDb.id eq id }.map { mapToSleep(it) }.firstOrNull()</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
@@ -172,7 +172,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-12-29 00:16</div>
+    <div style="float:right;">generated on 2025-05-20 10:21</div>
 </div>
 </body>
 </html>

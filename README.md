@@ -11,7 +11,6 @@ Backend: Kotlin + Javalin – Lightweight web framework for efficient server-sid
 DevOps & Cloud: GitHub CI/CD, Railway.com (cloud), Render.com (database) – Tools for continuous integration,
 deployment, and reliable cloud hosting solutions. <br>
 Testing: Unit, Selenium, Mocking – It's ensure application reliability and performance.<br>
-
 <h3>Features</h3>
 <li>User Management</li><br>
 <li>User Activity</li><br>

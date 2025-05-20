@@ -45,26 +45,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">SleepController</td>
 <td class="coverageStat">
   <span class="percent">
-    14.3%
+    100%
   </span>
   <span class="absValue">
-    (1/7)
+    (7/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/8)
+    (4/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    2.9%
+    77.1%
   </span>
   <span class="absValue">
-    (1/35)
+    (27/35)
   </span>
 </td>
 </tr>
@@ -72,18 +72,18 @@ Current scope:     <a href="../../index.html">all classes</a>
     <td class="name">SleepController$addsleep$$inlined$jsonToObject$1</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
   </tr>
@@ -110,26 +110,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    11.1%
+    88.9%
   </span>
   <span class="absValue">
-    (1/9)
+    (8/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/8)
+    (4/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    2.7%
+    75.7%
   </span>
   <span class="absValue">
-    (1/37)
+    (28/37)
   </span>
 </td>
 </tr>
@@ -161,40 +161,40 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;
 &nbsp;    fun getsleepUser(ctx: Context) {
-<b class="nc">&nbsp;        val mapper = jacksonObjectMapper().registerModule(JodaModule())</b>
-<b class="nc">&nbsp;            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</b>
-<b class="nc">&nbsp;        ctx.json(mapper.writeValueAsString(sleepDAO.getAllsleepUser()))</b>
+<b class="fc">&nbsp;        val mapper = jacksonObjectMapper().registerModule(JodaModule())</b>
+<b class="fc">&nbsp;            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</b>
+<b class="fc">&nbsp;        ctx.json(mapper.writeValueAsString(sleepDAO.getAllsleepUser()))</b>
 &nbsp;
 &nbsp;    }
 &nbsp;
 &nbsp;    fun getsleepById(ctx: Context) {
-<b class="nc">&nbsp;        val mapper = jacksonObjectMapper().registerModule(JodaModule())</b>
-<b class="nc">&nbsp;            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</b>
-<b class="nc">&nbsp;        val act = sleepDAO.getSleepbyId(ctx.pathParam(&quot;slp-id&quot;).toInt())</b>
-<b class="nc">&nbsp;        if (act != null) {</b>
+<b class="fc">&nbsp;        val mapper = jacksonObjectMapper().registerModule(JodaModule())</b>
+<b class="fc">&nbsp;            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</b>
+<b class="fc">&nbsp;        val act = sleepDAO.getSleepbyId(ctx.pathParam(&quot;slp-id&quot;).toInt())</b>
+<b class="pc">&nbsp;        if (act != null) {</b>
 <b class="nc">&nbsp;            ctx.json(mapper.writeValueAsString(sleepDAO.getSleepbyId(ctx.pathParam(&quot;slp-id&quot;).toInt())))</b>
 <b class="nc">&nbsp;            ctx.status(200)</b>
 &nbsp;        } else {
-<b class="nc">&nbsp;            ctx.status(400)</b>
+<b class="fc">&nbsp;            ctx.status(400)</b>
 &nbsp;        }
 &nbsp;
 &nbsp;    }
 &nbsp;
 &nbsp;    fun getSleepByUserId(ctx: Context) {
-<b class="nc">&nbsp;        val sleep = sleepDAO.getsleepByUserId(ctx.pathParam(&quot;user-id&quot;).toInt())</b>
-<b class="nc">&nbsp;        if (sleep.isNotEmpty()) {</b>
+<b class="fc">&nbsp;        val sleep = sleepDAO.getsleepByUserId(ctx.pathParam(&quot;user-id&quot;).toInt())</b>
+<b class="pc">&nbsp;        if (sleep.isNotEmpty()) {</b>
 <b class="nc">&nbsp;            ctx.json(jsonObjectMapper().writeValueAsString(sleep))</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
 &nbsp;    fun addsleep(ctx: Context) {
-<b class="nc">&nbsp;        val mapper = jacksonObjectMapper().registerModule(JodaModule())</b>
-<b class="nc">&nbsp;            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</b>
-<b class="nc">&nbsp;         val sleep: Sleep = jsonToObject(ctx.body())</b>
-<b class="nc">&nbsp;        val id = sleepDAO.save(sleep)</b>
-<b class="nc">&nbsp;        if (id != null) {</b>
-<b class="nc">&nbsp;            ctx.json(mapper.writeValueAsString(sleep))</b>
-<b class="nc">&nbsp;            ctx.status(201)</b>
+<b class="fc">&nbsp;        val mapper = jacksonObjectMapper().registerModule(JodaModule())</b>
+<b class="fc">&nbsp;            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</b>
+<b class="pc">&nbsp;         val sleep: Sleep = jsonToObject(ctx.body())</b>
+<b class="fc">&nbsp;        val id = sleepDAO.save(sleep)</b>
+<b class="pc">&nbsp;        if (id != null) {</b>
+<b class="fc">&nbsp;            ctx.json(mapper.writeValueAsString(sleep))</b>
+<b class="fc">&nbsp;            ctx.status(201)</b>
 &nbsp;        } else {
 <b class="nc">&nbsp;            ctx.status(400).result(&quot;Failed to add sleep record&quot;)</b>
 &nbsp;        }
@@ -202,20 +202,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;
 &nbsp;    fun deleteSleepByid(ctx: Context) {
-<b class="nc">&nbsp;        val mapper = jacksonObjectMapper().registerModule(JodaModule())</b>
-<b class="nc">&nbsp;            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</b>
-<b class="nc">&nbsp;        val sleep = sleepDAO.deleteSleepbyId(ctx.pathParam(&quot;slp-id&quot;).toInt())</b>
-<b class="nc">&nbsp;        if (sleep != null) {</b>
-<b class="nc">&nbsp;            ctx.json(mapper.writeValueAsString(sleepDAO.deleteSleepbyId(ctx.pathParam(&quot;slp-id&quot;).toInt())))</b>
-<b class="nc">&nbsp;            ctx.status(204)</b>
+<b class="fc">&nbsp;        val mapper = jacksonObjectMapper().registerModule(JodaModule())</b>
+<b class="fc">&nbsp;            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</b>
+<b class="fc">&nbsp;        val sleep = sleepDAO.deleteSleepbyId(ctx.pathParam(&quot;slp-id&quot;).toInt())</b>
+<b class="fc">&nbsp;        if (sleep != null) {</b>
+<b class="fc">&nbsp;            ctx.json(mapper.writeValueAsString(sleepDAO.deleteSleepbyId(ctx.pathParam(&quot;slp-id&quot;).toInt())))</b>
+<b class="fc">&nbsp;            ctx.status(204)</b>
 &nbsp;        } else
-<b class="nc">&nbsp;            ctx.status(400)</b>
+<b class="fc">&nbsp;            ctx.status(400)</b>
 &nbsp;    }
 &nbsp;
 &nbsp;
 &nbsp;    fun updatesleepbyid(ctx: Context) {
-<b class="nc">&nbsp;        val sleep = sleepDAO.getSleepbyId(ctx.pathParam(&quot;slp-id&quot;).toInt())</b>
-<b class="nc">&nbsp;        if (sleep != null) {</b>
+<b class="fc">&nbsp;        val sleep = sleepDAO.getSleepbyId(ctx.pathParam(&quot;slp-id&quot;).toInt())</b>
+<b class="pc">&nbsp;        if (sleep != null) {</b>
 <b class="nc">&nbsp;            val mapper = jacksonObjectMapper().registerModule(JodaModule())</b>
 <b class="nc">&nbsp;                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)</b>
 <b class="nc">&nbsp;            val newsleep = mapper.readValue&lt;Sleep&gt;(ctx.body())</b>
@@ -250,7 +250,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-12-29 00:16</div>
+    <div style="float:right;">generated on 2025-05-20 10:21</div>
 </div>
 </body>
 </html>
